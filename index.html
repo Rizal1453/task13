@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="navbar.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #5b5bf1;">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h2>TO DO </h2>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class=" ms-5 nav-link active fs-5 text-light" aria-current="page" href="/">Home</a>
+              </li>
+            </ul>
+            {{if .Data.IsLogin}}
+            <a href="#" class="me-5 text-decoration-none  text-light">Hallo,{{.Data.UserName}}</a>
+            <a href ="/logout" class="navbut btn text-light border-light" type="submit">LOGOUT</a>
+            {{else}}
+            <a class="nav-link text-decoration-none me-3 text-light" href="/registrasi">Register</a>
+            <a class="nav-link text-decoration-none me-3 text-light" href="/login">Login</a>
+            {{end}}
+           
+              
+          </div>
+        </div>
+    </nav>
+      <div>
+        <section class="vh-100">
+            <div class="container py-5 h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100 ">
+                <div class="col col-xl-10">
+          
+                  <div class="card shadow" style="border-radius: 15px;">
+                    <div class="card-body p-5">
+          
+                      <h1 class="mb-3 text-center">Todo List</h1>
+          
+                      <form action="/add" method="POST" class="justify-content-center align-items-center mb-4">
+                        <div class="d-flex form-outline flex-fill">
+                          <input type="text" id="form3" class="form-control form-control-lg " name="inputTitle" placeholder="Input Title"/>
+
+                        </div>
+                        <div>
+                          <input type="text" id="form3" class="form-control form-control-lg my-2" name="inputContent" placeholder="Input Content"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg " style="width: 100%;">Add</button>
+                      </form>
+          
+                      <ul class="list-group mb-0">
+                        {{range $index, $data := .Blogs}}
+                        <li
+                          class="list-group-item d-flex justify-content-between align-items-center rounded-0 border-0 mb-2">
+                          <div class="d-flex align-items-center">
+                            <span>{{$data.Title}}</span> 
+                            
+                          </div>
+                         
+                          <a href="/delete/{{$data.ID}}" data-mdb-toggle="tooltip" title="Remove item">
+                            <i class="fas fa-times text-primary"></i>
+                          </a>
+                          
+                        </li>
+                        <p class=" border-start-0 border-top-0 border-end-0 border-bottom "><span class="ms-3">{{$data.Content}}</span></p>
+                        {{end}}
+                      </ul>
+          
+                    </div>
+                  </div>
+          
+                </div>
+              </div>
+            </div>
+          </section>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
